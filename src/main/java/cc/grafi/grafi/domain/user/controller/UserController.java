@@ -5,6 +5,8 @@ import cc.grafi.grafi.domain.user.entity.User;
 import cc.grafi.grafi.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,13 +17,14 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{userId}")
-    public String getUserById(@PathVariable("userId") String userId) {
-        userService.getUser(userId);
-        return "성공";
+    public ResponseEntity<User> getUserById(@PathVariable("userId") String userId) {
+        User user = userService.getUser(userId);
+        return ResponseEntity.ok(user);
     }
 
     @PostMapping()
-    public void saveUser(@RequestBody UserCreationRequest request) {
+    public ResponseEntity<String> saveUser(@RequestBody UserCreationRequest request) {
         userService.saveUser(request);
+        return ResponseEntity.status(HttpStatus.CREATED).body("회원가입 성공");
     }
 }
