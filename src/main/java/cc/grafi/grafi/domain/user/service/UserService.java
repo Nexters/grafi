@@ -1,5 +1,6 @@
 package cc.grafi.grafi.domain.user.service;
 
+import cc.grafi.grafi.domain.user.dto.UserCreationRequest;
 import cc.grafi.grafi.domain.user.entity.User;
 import cc.grafi.grafi.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -14,5 +15,12 @@ public class UserService {
 
     public User getUser(String userId) {
         return userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("실패"));
+    }
+
+    @Transactional
+    public void saveUser(UserCreationRequest request) {
+        User user = UserCreationRequest.toEntity(request);
+        user.changeName("grafi");
+        userRepository.save(user);
     }
 }
