@@ -1,7 +1,7 @@
 package cc.grafi.grafi.domain.user.controller;
 
 import cc.grafi.grafi.domain.user.dto.UserCreationRequest;
-import cc.grafi.grafi.domain.user.entity.User;
+import cc.grafi.grafi.domain.user.dto.UserDetailResponse;
 import cc.grafi.grafi.domain.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -17,9 +17,9 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("/{userId}")
-    public ResponseEntity<User> getUserById(@PathVariable("userId") String userId) {
-        User user = userService.getUser(userId);
-        return ResponseEntity.ok(user);
+    public ResponseEntity<UserDetailResponse> getUserById(@PathVariable("userId") String userId) {
+        UserDetailResponse response = userService.getUser(userId);
+        return ResponseEntity.ok(response);
     }
 
     @PostMapping()

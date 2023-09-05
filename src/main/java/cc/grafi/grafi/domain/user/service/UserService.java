@@ -1,6 +1,7 @@
 package cc.grafi.grafi.domain.user.service;
 
 import cc.grafi.grafi.domain.user.dto.UserCreationRequest;
+import cc.grafi.grafi.domain.user.dto.UserDetailResponse;
 import cc.grafi.grafi.domain.user.entity.User;
 import cc.grafi.grafi.domain.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -13,8 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
     private final UserRepository userRepository;
 
-    public User getUser(String userId) {
-        return userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("실패"));
+    public UserDetailResponse getUser(String userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("해당 유저를 조회할 수 없습니다."));
+        return UserDetailResponse.fromEntity(user);
     }
 
     @Transactional
