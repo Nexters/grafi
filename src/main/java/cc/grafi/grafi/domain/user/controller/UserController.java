@@ -3,6 +3,7 @@ package cc.grafi.grafi.domain.user.controller;
 import cc.grafi.grafi.domain.user.dto.UserCreationRequest;
 import cc.grafi.grafi.domain.user.dto.UserDetailResponse;
 import cc.grafi.grafi.domain.user.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class UserController {
     }
 
     @PostMapping()
-    public ResponseEntity<String> saveUser(@RequestBody UserCreationRequest request) {
+    public ResponseEntity<String> saveUser(@RequestBody @Valid UserCreationRequest request) {
         userService.saveUser(request);
         return ResponseEntity.status(HttpStatus.CREATED).body("회원가입 성공");
     }
