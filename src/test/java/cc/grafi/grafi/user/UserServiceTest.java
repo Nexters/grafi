@@ -1,5 +1,6 @@
 package cc.grafi.grafi.user;
 
+import cc.grafi.grafi.domain.user.dto.UserDetailResponse;
 import cc.grafi.grafi.domain.user.entity.User;
 import cc.grafi.grafi.domain.user.repository.UserRepository;
 import cc.grafi.grafi.domain.user.service.UserService;
@@ -32,7 +33,7 @@ public class UserServiceTest {
                 .willReturn(Optional.ofNullable(testUserBuilder()));
 
         // when
-        User foundUser = userService.getUser("grafi");
+        UserDetailResponse foundUser = userService.getUser("grafi");
 
         // then
         Assertions.assertThat(foundUser.getName()).isEqualTo("그라피");
