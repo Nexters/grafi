@@ -45,11 +45,11 @@ public class UserControllerTest {
         // when
         MockHttpServletResponse response = mvc.perform(get(uri))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.userId").value("grafi"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.user_id").value("grafi"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("grafi"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.visitors").value(1L))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.text").value("취향 공유 서비스, 그라피"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.profile").value("test profile"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.profile_img").value("test profile"))
                 .andDo(print())
                 .andReturn().getResponse();
 
@@ -59,11 +59,11 @@ public class UserControllerTest {
 
     private static UserDetailResponse testUserResponse() {
         return UserDetailResponse.builder()
-                .userId("grafi")
+                .user_id("grafi")
                 .name("grafi")
                 .visitors(1L)
                 .text("취향 공유 서비스, 그라피")
-                .profile("test profile")
+                .profile_img("test profile")
                 .build();
     }
 }

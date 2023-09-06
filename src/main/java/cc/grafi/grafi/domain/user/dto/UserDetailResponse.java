@@ -7,19 +7,19 @@ import lombok.Data;
 @Data
 @Builder
 public class UserDetailResponse {
-    private String userId;
+    private String user_id;
     private String name;
     private Long visitors;
     private String text;
-    private String profile;
+    private String profile_img;
 
     public static UserDetailResponse fromEntity(User user) {
         return UserDetailResponse.builder()
-                .userId(user.getId())
+                .user_id(user.getId())
                 .name(user.getName())
                 .visitors(user.getVisitors())
                 .text(user.getText())
-                .profile(user.getProfile())
+                .profile_img(user.getProfile())
                 .build();
     }
 }
