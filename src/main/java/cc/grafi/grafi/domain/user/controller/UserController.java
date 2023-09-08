@@ -2,6 +2,7 @@ package cc.grafi.grafi.domain.user.controller;
 
 import cc.grafi.grafi.domain.user.dto.UserCreationRequest;
 import cc.grafi.grafi.domain.user.dto.UserDetailResponse;
+import cc.grafi.grafi.domain.user.dto.UserUpdateRequest;
 import cc.grafi.grafi.domain.user.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,5 +28,11 @@ public class UserController {
     public ResponseEntity<String> saveUser(@RequestBody @Valid UserCreationRequest request) {
         userService.saveUser(request);
         return ResponseEntity.status(HttpStatus.CREATED).body("회원가입 성공");
+    }
+
+    @PutMapping()
+    public ResponseEntity<String> updateUser(@RequestBody @Valid UserUpdateRequest request) {
+        userService.updateUser(request);
+        return ResponseEntity.ok("유저 정보 업데이트 성공");
     }
 }

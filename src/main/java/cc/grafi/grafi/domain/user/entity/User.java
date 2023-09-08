@@ -1,5 +1,6 @@
 package cc.grafi.grafi.domain.user.entity;
 
+import cc.grafi.grafi.domain.user.dto.UserUpdateRequest;
 import cc.grafi.grafi.global.entity.BaseTimeEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,5 +38,26 @@ public class User extends BaseTimeEntity {
 
     public void changeName(String name) {
         this.name = name;
+    }
+
+    public void updateUser(UserUpdateRequest request) {
+        if (request.getName() != null) {
+            this.name = request.getName();
+        }
+        if (request.getPassword() != null) {
+            this.password = request.getPassword();
+        }
+        if (request.getEmail() != null) {
+            this.email = request.getEmail();
+        }
+        if (request.getTheme_color() != null) {
+            this.themeColor = request.getTheme_color();
+        }
+        if (request.getText() != null) {
+            this.text = request.getText();
+        }
+        if (request.getProfile_img() != null) {
+            this.profile = request.getProfile_img();
+        }
     }
 }

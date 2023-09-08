@@ -8,13 +8,13 @@ import lombok.Data;
 @Data
 public class UserCreationRequest {
     @NotBlank
-    private String userId;
+    private String user_id;
     @NotNull
     private String password;
 
     public static User toEntity(UserCreationRequest request) {
         return User.builder()
-                .id(request.getUserId())
+                .id(request.getUser_id())
                 .password(request.getPassword())
                 .build();
     }
