@@ -33,7 +33,7 @@ public class UserRepositoryTest {
         userRepository.save(user);
 
         // when
-        User foundUser = userRepository.findById("aodtns").orElse(User.builder().build());
+        User foundUser = userRepository.findById("grafi").orElse(User.builder().build());
 
         // then
         Assertions.assertThat(foundUser.getName()).isEqualTo("그라피");
