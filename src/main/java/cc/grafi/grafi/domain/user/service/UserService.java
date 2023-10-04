@@ -1,5 +1,7 @@
 package cc.grafi.grafi.domain.user.service;
 
+import cc.grafi.grafi.domain.auth.dto.UserLoginRequest;
+import cc.grafi.grafi.domain.auth.exception.UnauthorizedException;
 import cc.grafi.grafi.domain.user.dto.UserCreationRequest;
 import cc.grafi.grafi.domain.user.dto.UserDetailResponse;
 import cc.grafi.grafi.domain.user.dto.UserUpdateRequest;
@@ -14,6 +16,18 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserService {
     private final UserRepository userRepository;
+
+    public UserDetailResponse login(UserLoginRequest request) {
+        String userId = request.getUserId();
+        String password = request.getPassword();
+
+        User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("해당 유저를 조회할 수 없습니다."));
+        if (!password.equals(user.getPassword())) {
+            throw new UnauthorizedException("유효하지 않은 비밀번호입니다.");
+        }
+
+        return UserDetailResponse.fromEntity(user);
+    }
 
     public UserDetailResponse getUser(String userId) {
         User user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("해당 유저를 조회할 수 없습니다."));
